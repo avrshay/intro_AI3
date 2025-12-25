@@ -35,7 +35,7 @@
           :precondition (and (is-cultivator ?v)
                               (at ?v ?loc)
                               (at ?t ?loc))
-          :effect (and (has-tiller ?v ?t )
+          :effect (and (has-tiller ?v ?t)
                          (not(at ?t ?loc)))
      )
 
@@ -44,16 +44,16 @@
           :precondition (and (is-planter ?v)
                               (at ?v ?loc)
                               (at ?s ?loc))
-          :effect (and (has-seeds ?v ?s )
+          :effect (and (has-seeds ?v ?s)
                          (not(at ?s ?loc)))
      )
 
       (:action get-watering-can
           :parameters (?v - volunteer ?wc - wateringCan ?loc - location)
-          :precondition (and (is-waterer  ?v)
+          :precondition (and (is-waterer ?v)
                               (at ?v ?loc)
                               (at ?wc ?loc))
-          :effect (and (has-watering-can ?v ?wc )
+          :effect (and (has-watering-can ?v ?wc)
                          (not(at ?wc ?loc)))
      )
 
@@ -94,6 +94,8 @@
             (is-waterer ?w)
             (is-planter ?p)
             (is-cultivator ?c)
+            (soil-is-tilled)
+            (seeds-are-sown)
             (garden-is-watered))
 
           :effect (and(garden-is-thriving))
