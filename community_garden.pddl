@@ -59,25 +59,43 @@
 
      (:action till-soil
           :parameters (?v - volunteer ?tool - tiller)
-          :precondition (and)
-          :effect (and)
+          :precondition (and(at ?v gardenPlot)
+            (has-tiller ?v ?tool)
+            (is-cultivator ?v))
+
+          :effect (and(soil-is-tilled))
      )
 
      (:action sow-seeds
           :parameters (?v - volunteer ?tool - seeds)
-          :precondition (and)
-          :effect (and)
+          :precondition (and(at ?v gardenPlot)
+            (has-seeds ?v ?tool)
+            (is-planter ?v)
+            (soil-is-tilled))
+
+          :effect (and (seeds-are-sown))
      )
 
      (:action water-garden
           :parameters (?v - volunteer ?tool - wateringCan)
-          :precondition (and)
-          :effect (and)
+          :precondition (and(at ?v gardenPlot)
+            (has-watering-can ?v ?tool)
+            (is-waterer ?v)
+            (seeds-are-sown))
+
+          :effect (and(garden-is-watered))
      )
 
      (:action celebrate-garden-opening
           :parameters (?c - volunteer ?p - volunteer ?w - volunteer)
-          :precondition (and)
-          :effect (and)
+          :precondition  (and(at ?c gardenPlot)
+            (at ?p gardenPlot)
+            (at ?w gardenPlot)
+            (is-waterer ?w)
+            (is-planter ?p)
+            (is-cultivator ?c)
+            (garden-is-watered))
+
+          :effect (and(garden-is-thriving))
      )
 )
