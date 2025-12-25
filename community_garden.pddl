@@ -23,28 +23,38 @@
           (garden-is-thriving)
      )
 
-     (:action move
+      (:action move
           :parameters (?v - volunteer ?from - location ?to - location)
-          :precondition (and)
-          :effect (and)
+          :precondition (and (at ?v ?from))
+          :effect (and (at ?v ?to)
+                    (not(at ?v ?from)))
      )
 
-     (:action get-tiller
+      (:action get-tiller
           :parameters (?v - volunteer ?t - tiller ?loc - location)
-          :precondition (and)
-          :effect (and)
+          :precondition (and (is-cultivator ?v)
+                              (at ?v ?loc)
+                              (at ?t ?loc))
+          :effect (and (has-tiller ?v ?t )
+                         (not(at ?t ?loc)))
      )
 
-     (:action get-seeds
+    (:action get-seeds
           :parameters (?v - volunteer ?s - seeds ?loc - location)
-          :precondition (and)
-          :effect (and)
+          :precondition (and (is-planter ?v)
+                              (at ?v ?loc)
+                              (at ?s ?loc))
+          :effect (and (has-seeds ?v ?s )
+                         (not(at ?s ?loc)))
      )
 
-     (:action get-watering-can
+      (:action get-watering-can
           :parameters (?v - volunteer ?wc - wateringCan ?loc - location)
-          :precondition (and)
-          :effect (and)
+          :precondition (and (is-waterer  ?v)
+                              (at ?v ?loc)
+                              (at ?wc ?loc))
+          :effect (and (has-watering-can ?v ?wc )
+                         (not(at ?wc ?loc)))
      )
 
      (:action till-soil
